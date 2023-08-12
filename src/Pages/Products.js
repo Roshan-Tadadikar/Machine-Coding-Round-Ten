@@ -2,13 +2,14 @@
 import React, { useEffect, useReducer, useState } from 'react'
 import Navabar from '../Components/Navabar'
 import { inventoryData } from '../Data/Data'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const Products = () => {
     let prevFilter = "All"
     let counter = 20
     const [flag, setFlag] = useState(false)
     const location = useLocation()
+    const navigate = useNavigate()
     const handleReducerData = (state, action) => {
         switch (action.type) {
             case "filter_by_type":
@@ -181,7 +182,7 @@ const Products = () => {
                             <tbody>
                                 {
                                     state?.data?.map(ele =>
-                                        <tr>
+                                        <tr className='cursor-pointer' onClick={()=>navigate("/singlePage", {state:ele})}>
                                             <td class="px-4 py-3"><img src={ele.imageUrl} className='w-40' /></td>
                                             <td class="px-4 py-3">{ele.name}</td>
                                             <td class="px-4 py-3">{ele.description}</td>
