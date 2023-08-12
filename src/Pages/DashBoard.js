@@ -11,7 +11,7 @@ const DashBoard = () => {
 
     const navigate = useNavigate()
 
-    if (location.pathname == "/dashboard") {
+    if (location.pathname == "/") {
         return (
             <div>
                 <Navabar />

@@ -87,16 +87,24 @@ const Products = () => {
         }
 
         // dispatch({ type: "set_new_item", payload: prod })
-        if (localStorage.getItem("arr") == undefined) {
-            const newArr = [prod]
-            localStorage.setItem("arr", JSON.stringify(newArr))
-        } else {
-            const existArray  = localStorage.getItem("arr")
-            const arr =existArray.concat(prod)
-            localStorage.setItem("arr", JSON.stringify(arr))
-        }
-        dispatch({ type: "set_new_item", payload: prod })
-        dispatch({ type: "close_modal" })
+        // if (localStorage.getItem("arr") == undefined) {
+        //     const newArr = [prod]
+        //     localStorage.setItem("arr", JSON.stringify(newArr))
+        // } else {
+        //     const existArray  = localStorage.getItem("arr")
+        //     const arr =existArray.concat(prod)
+        //     localStorage.setItem("arr", JSON.stringify(arr))
+        // }
+        // dispatch({ type: "set_new_item", payload: [prod] })
+        // dispatch({ type: "close_modal" })
+
+        const existingArrayJSON = localStorage.getItem("arr");
+        const existingArray = existingArrayJSON ? JSON.parse(existingArrayJSON) : [];
+    
+        const updatedArray = [...existingArray, prod];
+        localStorage.setItem("arr", JSON.stringify(updatedArray));
+        dispatch({ type: "set_new_item", payload: updatedArray });
+        dispatch({ type: "close_modal" });
     }
 
     useEffect(() => {
